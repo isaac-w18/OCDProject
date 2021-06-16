@@ -11,6 +11,17 @@ library(readr)
 
 ```{r}
 knitr::opts_chunk$set(echo = FALSE)
-read_csv("T0001-10.1080_16506073.2018.1478447.csv")
+# Table 1. Y-BOCS scores (M and SD) for the subgroups that participated and not participated in the Y-BOCS interview at the 4 year follow-up, and total sample, at the different time points.
+# Meaning: No significant difference between groups that did and did not show up at 4 year follow-up, meaning the group that showed up is not an unrepresentative sample
+table1 <- read.csv("T0004-10.1080_16506073.2018.1478447.csv")
+table1 <- table1 %>%
+  mutate(B4DT = NULL)  %>%
+  mutate(ERP = NULL) %>%
+  rename(B4DT = X) %>%
+  rename(ERP = X.1)
+clean_data <- table1[-c(3,5,10), ]
+view(clean_data)
+
+rlang::last_error()
 ```
 

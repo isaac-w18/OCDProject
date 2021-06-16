@@ -168,28 +168,21 @@ pre code {
 </div>
 
 
-<pre><code>## Warning: Missing column names filled in: &#39;X2&#39; [2]</code></pre>
-<pre><code>## Warning: Duplicated column names deduplicated: &#39; &#39; =&gt; &#39; _1&#39; [4], &#39; &#39; =&gt;
-## &#39; _2&#39; [5], &#39; &#39; =&gt; &#39; _3&#39; [6]</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X2&#39; [2], &#39;X4&#39; [4]</code></pre>
 <pre><code>## 
 ## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   ` ` = col_character(),
 ##   X2 = col_character(),
-##   Participated = col_character(),
-##   ` _1` = col_character(),
-##   ` _2` = col_character(),
-##   ` _3` = col_character()
+##   B4DT = col_character(),
+##   X4 = col_character(),
+##   ERP = col_character()
 ## )</code></pre>
-<pre><code>## # A tibble: 6 x 6
-##   ` `                X2         Participated ` _1`       ` _2`       ` _3`      
-##   &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;      
-## 1                    Yes        No           t-value     Total samp… ES (d)     
-## 2 Time point         (N = 58)   (N = 19)     (p-value)   (N = 77)    within-gro…
-## 3 Pre-treatment      26.3 (4.1) 24.8 (4.7)   1.25 (0.22) 25.9 (4.3)             
-## 4 Post-treatment     9.8 (4.2)  10.6 (4.8)   0.70 (0.49) 10.0 (4.4)  3.65       
-## 5 3 months follow-up 10.4 (5.9) 11.8 (7.4)   0.83 (0.41) 10.7 (6.3)  2.73       
-## 6 6-months follow-up 11.2 (6.1) 11.6 (6.4)   0.21 (0.84) 11.3 (6.1)  2.69</code></pre>
+<pre><code>## Rows: 10
+## Columns: 3
+## $ ` `  &lt;chr&gt; &quot;1. Number fulfilling DSM-criteria and offered treatment&quot;, &quot;2. Pr…
+## $ B4DT &lt;chr&gt; &quot;100&quot;, &quot;3%&quot;, &quot; &quot;, &quot;1%&quot;, &quot; &quot;, &quot;73%&quot;, &quot;27%&quot;, &quot;18%&quot;, &quot;57%&quot;, &quot; &quot;
+## $ ERP  &lt;chr&gt; &quot;100&quot;, &quot;15%*&quot;, &quot; &quot;, &quot;10%&quot;, &quot; &quot;, &quot;40%&quot;, &quot;60%&quot;, &quot;11%&quot;, &quot;4%&quot;, &quot; &quot;</code></pre>
 
 
 
