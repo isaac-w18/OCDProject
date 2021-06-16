@@ -1,0 +1,16 @@
+---
+title: "OCD Data 1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(readr)
+```
+
+```{r}
+knitr::opts_chunk$set(echo = FALSE)
+read_csv("T0001-10.1080_16506073.2018.1478447.csv")
+```
+
