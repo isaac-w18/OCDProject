@@ -7,21 +7,45 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(readr)
+library(stringr)
 ```
 
 ```{r}
 knitr::opts_chunk$set(echo = FALSE)
-# Table 1. Y-BOCS scores (M and SD) for the subgroups that participated and not participated in the Y-BOCS interview at the 4 year follow-up, and total sample, at the different time points.
-# Meaning: No significant difference between groups that did and did not show up at 4 year follow-up, meaning the group that showed up is not an unrepresentative sample
 table1 <- read.csv("T0004-10.1080_16506073.2018.1478447.csv")
 table1 <- table1 %>%
   mutate(B4DT = NULL)  %>%
+  rename(proportions = X.) %>%
   mutate(ERP = NULL) %>%
   rename(B4DT = X) %>%
-  rename(ERP = X.1)
-clean_data <- table1[-c(3,5,10), ]
-view(clean_data)
+  rename(ERP = X.1) 
+view(table1)
 
+# table1[B4DT] = table1[B4DT].str.replace('%','')
+view(table1)
+
+clean_data <- table1[-c(1,3,5,10), ]
+clean_data$B4DT<-gsub("%","",as.character(clean_data$B4DT))
+clean_data$ERP<-gsub("%","",as.character(clean_data$ERP))
+clean_data$ERP<-gsub("*","",as.character(clean_data$ERP))
+view(clean_data)
+sorted <- levels(clean_data$proportions) <- c("Declined Treatment", 
+  "Dropped Treatment", "Remitted Post-assessment", "Not Remitted", "Relapsed",
+  "Recovered (non-remitters)", "Declined Treatment ", 
+  "Dropped Treatment ", "Remitted Post-assessment ", "Not Remitted ", "Relapsed ",
+  "Recovered (non-remitters) ")
+
+sorted <- sorted %>%
+  mutate(Treatment = clean_data$B4DT)
+  
+view(sorted)
 rlang::last_error()
 ```
+
+```{r}
+clean_data %>%
+  ggplot(aes(x = ERP, y = B4DT)) +
+  geom_jitter() + facet_wrap(~ proportions)
+```
+
 
