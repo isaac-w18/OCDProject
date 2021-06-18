@@ -8,6 +8,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(readr)
 library(stringr)
+library(tidyr)
 ```
 
 ```{r}
@@ -29,9 +30,14 @@ clean_data$B4DT<-gsub("%","",as.character(clean_data$B4DT))
 clean_data$ERP<-gsub("%","",as.character(clean_data$ERP))
 clean_data$ERP<-gsub("*","",as.character(clean_data$ERP))
 view(clean_data)
+
+# final_data <- pivot_longer(clean_data, cols = 2:3, names_to = "Treatment", values_to = "Proportion")
+# view(final_data)
+
+
 sorted <- levels(clean_data$Measurement) <- c("Declined Treatment", 
   "Dropped Treatment", "Remitted Post-assessment", "Not Remitted", "Relapsed",
-  "Recovered (non-remitters)", "Declined Treatment ", 
+  "Recovered (non-remitters)", "Declined Treatment", 
   "Dropped Treatment ", "Remitted Post-assessment ", "Not Remitted ", "Relapsed ",
   "Recovered (non-remitters) ")
 
@@ -45,9 +51,11 @@ view(sorted_1)
 ```
 
 ```{r}
-clean_data %>%
-  ggplot(aes(x = ERP, y = B4DT)) +
-  geom_jitter() + facet_wrap(~ Measurement)
+sorted_1 %>%
+  ggplot(data = sorted_1, 
+         mapping = aes(x = Measurement, y = Proportion, fill = Treatment)) +
+    geom_col() + 
+    expand_limits(x= c(0,20))
 ```
 
 
