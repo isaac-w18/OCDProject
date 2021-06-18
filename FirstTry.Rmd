@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = FALSE)
 table1 <- read.csv("T0004-10.1080_16506073.2018.1478447.csv")
 table1 <- table1 %>%
   mutate(B4DT = NULL)  %>%
-  rename(proportions = X.) %>%
+  rename(Measurement = X.) %>%
   mutate(ERP = NULL) %>%
   rename(B4DT = X) %>%
   rename(ERP = X.1) 
@@ -29,23 +29,25 @@ clean_data$B4DT<-gsub("%","",as.character(clean_data$B4DT))
 clean_data$ERP<-gsub("%","",as.character(clean_data$ERP))
 clean_data$ERP<-gsub("*","",as.character(clean_data$ERP))
 view(clean_data)
-sorted <- levels(clean_data$proportions) <- c("Declined Treatment", 
+sorted <- levels(clean_data$Measurement) <- c("Declined Treatment", 
   "Dropped Treatment", "Remitted Post-assessment", "Not Remitted", "Relapsed",
   "Recovered (non-remitters)", "Declined Treatment ", 
   "Dropped Treatment ", "Remitted Post-assessment ", "Not Remitted ", "Relapsed ",
   "Recovered (non-remitters) ")
 
-sorted <- sorted %>%
-  mutate(Treatment = clean_data$B4DT)
-  
-view(sorted)
-rlang::last_error()
+sorted_1 <- as.tibble(sorted) %>%
+  rename(Measurement = value) %>%
+  mutate(Proportion = c(clean_data$B4DT, clean_data$ERP)) %>%
+  mutate(Treatment = c("B4DT", "B4DT", "B4DT", "B4DT", "B4DT", "B4DT", 
+                       "ERP", "ERP", "ERP", "ERP", "ERP", "ERP"))
+
+view(sorted_1)
 ```
 
 ```{r}
 clean_data %>%
   ggplot(aes(x = ERP, y = B4DT)) +
-  geom_jitter() + facet_wrap(~ proportions)
+  geom_jitter() + facet_wrap(~ Measurement)
 ```
 
 
