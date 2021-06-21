@@ -3,5 +3,6 @@
 .RData
 .Ruserdata
 
+Anxiety_Prevalence.Rmd
 *.Rproj
 *.Rmd
